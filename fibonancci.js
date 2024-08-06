@@ -22,19 +22,13 @@ let fibonacciSequence=[];
 
  function fibonacci(num){
     if(num<2) return num;
-    else{
-      return fibonacci(num-1)+fibonacci(num-2);
-    }
-      
+    else return fibonacci(num-1)+fibonacci(num-2);    
   }   
+
   return fibonacciSequence;
 
 }
    
 
-
-
-
-
-// console.log(fibonacciIteration(14));
+console.log(fibonacciIteration(14));
 console.log(fibonacciRecursive(14));
