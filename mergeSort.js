@@ -1,63 +1,32 @@
 const mergeSort=(array)=>{
-//divide
 const arrayLength = array.length;
 if(arrayLength>1){
-    const mid= Math.floor(arrayLength/2);
     let leftArray=[];
     let rightArray=[];
-    for(let i=0;i<mid;i++){
-        leftArray.push(array[i]);
-    }
-    for(let i=mid;i<arrayLength;i++){
-        rightArray.push(array[i]);  
-    }
+    const mid= Math.floor(arrayLength/2);
+    leftArray=array.slice(0,mid);
+    rightArray=array.slice(mid,arrayLength);
     mergeSort(leftArray);
     mergeSort(rightArray);
     mergeSortedArray(leftArray,rightArray,array);
-  console.log('array after returning',array);
 }
-
+return array;
 }
 
 const mergeSortedArray=(arr1,arr2,array)=>{
     const length =array.length;
     array.length=0;
-    let smallerArray=[],largerArray=[],mergedArray=[];
-    if(arr1.length<arr2.length) {
-        smallerArray=[...arr1];
-        largerArray=[...arr2];
-    }else{
-        smallerArray=[...arr2];
-        largerArray=[...arr1];
-    }
     for(let i=0;i<length;i++){
-     if(smallerArray.length>0){
-        if(smallerArray[0]>largerArray[largerArray.length-1]){
-            array.push(...largerArray,...smallerArray);
-            return array;
+        if(arr1.length===0) array.push(...arr2);
+        if(arr2.length===0) array.push(...arr1);
+        if(arr1.length>0 || arr1.length>0){
+            if(arr1[0]>arr2[arr2.length-1]) return array.push(...arr2,...arr1); 
+            if(arr1[arr1.length-1]<arr2[0]) return array.push(...arr1,...arr2);
+            else (arr1[0]<arr2[0]) ? array.push(...arr1.splice(0,1)):array.push(...arr2.splice(0,1));      
         }
-        if(smallerArray[smallerArray.length-1]<largerArray[0]){
-            array.push(...smallerArray,...largerArray);
-            return array;
-        }else{
-            if(smallerArray[0]<largerArray[0]){
-                array.push(smallerArray[0]);
-                smallerArray.shift();
-            }else{
-                array.push(largerArray[0]);
-                largerArray.shift(); 
-            }
-        }
-     }else{
-        array.push(...largerArray);
-     }
-    
-    
     }
     return array;
     }
     
-
- console.log('merge',mergeSortedArray([3,4,5,10,22],[2,5,6,7,8,9],[]));
-const array=[3, 2, 1, 13, 8, 5, 0, 1,7,4,10,11];
- mergeSort(array);
+const array=[3, 2, 1, 13, 8, 5, 0, 1,7,4,10,11,6,9,12];
+console.log(mergeSort(array));
